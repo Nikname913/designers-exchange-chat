@@ -91,7 +91,7 @@ const sendMessage = () => {
 const addChatMessage = (data) => {
   removeChatTyping(data)
 
-  const typingClass = data.typing ? 'typing' : ''
+  const typingClass = data.typing ? 'что-то печатает..' : ''
 
   const html = `
     <li

@@ -13,6 +13,14 @@ app.use(express.static(__dirname))
 let users = 0
 
 io.on('connection', (S) => {
+
+  // ----------------------------------------------------------------
+  // console.log('список комнат - ')
+  // console.log(S.rooms)
+  // console.log('--------------------------------------------------------')
+  // console.log(S)
+  // ----------------------------------------------------------------
+
   let user = false
 
   S.on('new message', (message) => {
@@ -36,6 +44,14 @@ io.on('connection', (S) => {
       username: S.username,
       users
     })
+
+    false && S.to(username).emit('user joined', {
+      username: S.username,
+      users
+    })
+
+    false && S.join(username)
+
   })
 
   S.on('typing', () => {
