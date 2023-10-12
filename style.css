@@ -79,6 +79,10 @@ ul {
   display: none;
 }
 
+.login_page {
+  display: block;
+}
+
 .messages {
   font-size: 150%;
 }

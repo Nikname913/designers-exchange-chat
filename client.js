@@ -37,6 +37,7 @@ const $chatPage = findOne('.chat_page')
 // ----------------------------------------------------------------
 
 const S = io()
+console.log(S)
 
 let username
 let connected = false

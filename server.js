@@ -15,10 +15,9 @@ let users = 0
 io.on('connection', (S) => {
 
   // ----------------------------------------------------------------
-  // console.log('список комнат - ')
-  // console.log(S.rooms)
-  // console.log('--------------------------------------------------------')
-  // console.log(S)
+  console.log('список комнат - ')
+  console.log(S.rooms)
+  console.log('--------------------------------------------------------')
   // ----------------------------------------------------------------
 
   let user = false
@@ -31,7 +30,16 @@ io.on('connection', (S) => {
   })
 
   S.on('add user', (username) => {
+
     if (user) return
+
+    S.join(username)
+
+    // ----------------------------------------------------------------
+    console.log('список комнат - ')
+    console.log(S.rooms)
+    console.log('--------------------------------------------------------')
+    // ----------------------------------------------------------------
 
     S.username = username
     ++users
@@ -40,17 +48,10 @@ io.on('connection', (S) => {
       users
     })
 
-    S.broadcast.emit('user joined', {
+    S.broadcast.to('some room').emit('user joined', {
       username: S.username,
       users
     })
-
-    false && S.to(username).emit('user joined', {
-      username: S.username,
-      users
-    })
-
-    false && S.join(username)
 
   })
 
@@ -68,6 +69,7 @@ io.on('connection', (S) => {
 
   S.on('disconnect', () => {
     if (user) {
+
       --users
 
       S.broadcast.emit('user left', {
